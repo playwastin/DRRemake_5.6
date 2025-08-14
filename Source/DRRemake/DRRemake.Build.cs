@@ -5,22 +5,22 @@ public class DRRemake : ModuleRules
     public DRRemake(ReadOnlyTargetRules Target) : base(Target)
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+        CppStandard = CppStandardVersion.Cpp20;
 
-        PublicDependencyModuleNames.AddRange(new string[] {
-            "Core",
-            "CoreUObject",
-            "Engine",
+        PublicDependencyModuleNames.AddRange(new string[]
+        {
+            "Core", "CoreUObject", "Engine",
             "InputCore",
-            "EnhancedInput",          // UInputAction, MappingContext
-            "Niagara",                // UNiagaraSystem
-            "NavigationSystem",       // UNavigationSystemV1::K2_* helpers
-            "AIModule",               // AIController, Behavior
-            "GameplayTasks"           // AI tasks
+            "NavigationSystem",   // UNavigationSystemV1, ARecastNavMesh
+            "AIModule",           // AIController etc.
+            "GameplayTasks",      // AI/Tasks
+            "EnhancedInput",      // Enhanced input
+            "Niagara"             // Niagara types if referenced
         });
 
-        PrivateDependencyModuleNames.AddRange(new string[] {
-            "StateTreeModule",        // if you use StateTree
-            "GameplayStateTreeModule" // UStateTreeAIComponent
+        PrivateDependencyModuleNames.AddRange(new string[]
+        {
+            "Slate", "SlateCore", "UMG"
         });
     }
 }
