@@ -6,30 +6,30 @@ public class DRAssetForgeEditor : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] {
+        PublicDependencyModuleNames.AddRange(new[]
+        {
             "Core",
             "CoreUObject",
             "Engine",
-            "InputCore",
             "Slate",
             "SlateCore",
-            "AssetRegistry",
-            "Json",
-            "JsonUtilities",
-            "Niagara"
+            "UMG",
         });
 
-        PrivateDependencyModuleNames.AddRange(new string[] {
-            "UnrealEd",               // editor-only helpers
+        // Editor-only helpers/APIs live in these modules.
+        // (The plugin is Editor-type via the .uplugin, so these are fine.)
+        PrivateDependencyModuleNames.AddRange(new[]
+        {
+            "UnrealEd",          // UPackageTools, content ops
             "AssetTools",
-            "EditorFramework",
-            "Kismet",
             "Projects",
-            "AIModule",
-            "NavigationSystem",
-            "GameplayTasks",
-            "StateTreeModule",
-            "GameplayStateTreeModule"
+            "EditorSubsystem",
+            "Kismet",            // UDataTableFunctionLibrary
+            "DataTableEditor"    // editor helpers for data tables (optional)
         });
+
+        // Recommended modern defaults
+        bUseUnity = true;
+        CppStandard = CppStandardVersion.Cpp20;
     }
 }

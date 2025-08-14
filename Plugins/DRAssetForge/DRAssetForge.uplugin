@@ -1,11 +1,18 @@
 {
   "FileVersion": 3,
   "Version": 1,
-  "VersionName": "1.0",
+  "VersionName": "0.1.0",
   "FriendlyName": "DR Asset Forge",
-  "Description": "CSV ➜ DataTables ➜ DR DataAssets editor tooling.",
+  "Description": "Editor tooling for DR: CSV → DataTables, quick asset scaffolding, etc.",
   "Category": "Editor",
-  "CreatedBy": "Gaz",
+  "CreatedBy": "playwastin",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": false,
+  "IsBetaVersion": true,
+  "Installed": false,
   "EnabledByDefault": true,
   "Modules": [
     {

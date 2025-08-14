@@ -1,35 +1,27 @@
-﻿// DR_DataTableHelper.h (UE 5.6.1)
+﻿// DR_DataTableHelper.h
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
 
-/**
- * Thin helpers around UDataTable that match UE5.6 signatures.
- * NOTE: ForeachRow passes 'const RowType&' — not a pointer.
- */
-namespace DR_DataTableHelper
+class DRASSETFORGEEDITOR_API FDR_DataTableHelper
 {
-    template<typename RowType>
-    inline void ForEachRow(const UDataTable* Table, TFunctionRef<void(const FName& RowName, const RowType& Row)> Visitor)
-    {
-        if (!Table) return;
-        Table->ForeachRow<RowType>(TEXT("DR_DataTableHelper"), Visitor); // :contentReference[oaicite:11]{index=11}
-    }
+public:
+    /**
+     * Import CSV text into a UDataTable using the correct 5.6 API.
+     * Returns true on success.
+     */
+    static bool ImportCSVToDataTable(UDataTable* DataTable, const FString& CSV, UScriptStruct* RowStruct);
 
-    template<typename RowType>
-    inline bool GetAllRows(const UDataTable* Table, TArray<const RowType*>& OutRows)
-    {
-        if (!Table) return false;
+    /**
+     * Create or find a DataTable asset at /Game/... and save it.
+     * PackagePath is like "/Game/Data/DT_Items".
+     */
+    static UDataTable* CreateOrLoadDataTableAsset(const FString& PackagePath, UScriptStruct* RowStruct);
 
-        TArray<RowType*> TempRows;
-        Table->GetAllRows<RowType>(TEXT("DR_DataTableHelper"), TempRows); // gives TArray<RowType*>
-        OutRows.Reset();
-        OutRows.Reserve(TempRows.Num());
-        for (RowType* R : TempRows)
-        {
-            OutRows.Add(R);
-        }
-        return true;
-    }
-}
+    /**
+     * Save a package using 5.6 signature (FSavePackageArgs).
+     * FilePath is disk path ending with .uasset
+     */
+    static bool SavePackageToDisk(UPackage* Package, UObject* Asset, const FString& FilePath);
+};
